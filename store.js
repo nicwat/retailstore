@@ -110,12 +110,20 @@ var descriptionAdd = function(){
 var priceAdd = function (){
 	var itemPrice = sget("Enter price").trim();
 	price= itemPrice;
-	if (price.length <1 || isFinite(price)===false) {
-		console.log("Please enter a valid price.");
+	if (itemPrice.length <1 || isFinite(itemPrice)===false) {
+		console.log("Please enter a valid price.\n");
+		priceAdd();
 	}
 };
 
-// var inStockAdd = function(){};
+var inStockAdd = function(){
+	var itemQuant = sget("How many are are available for sale?").trim();
+	numInStock = itemQuant;
+	if (itemQuant.length <1 || isFinite(itemQuant)===false) {
+		console.log("Please enter a valid quantity.\n");
+		inStockAdd();
+	}
+};
 
 
 
@@ -123,7 +131,7 @@ var priceAdd = function (){
 var addMerchandise = function() { 
 		descriptionAdd();
 		priceAdd();
-		// inStockAdd();
+		inStockAdd();
     var newInventory = new inventory(description, price);
 		//include numInStock      
          totalMerchandise.push(newInventory);
