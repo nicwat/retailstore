@@ -24,3 +24,55 @@ var exit = function() {
   console.log("You have exited the program.");
   sleep(600);
 };
+
+
+function inventory(description, price, numInStock) {
+  this.description = description;
+  this.price = price;
+  this.numInStock =  numInStock;
+}
+
+
+var totalMerchandise = [];
+
+//*********************************//
+
+
+var descriptionAdd = function(){
+	var itemDescription = sget("Enter description").trim();
+	description = itemDescription;
+	if (itemDescription.length === 0){
+		console.log("Please enter a valid description");
+	}
+};
+
+var priceAdd = function (){
+	var itemPrice = sget("Enter price").trim();
+	price= itemPrice;
+	if (priceAdd.length <1 || isFinite(health)===false) {
+		console.log("Please enter a valid price.");
+	}
+};
+
+// var inStockAdd = function(){};
+
+
+
+
+var addMerchandise = function() { 
+		descriptionAdd();
+		priceAdd();
+		// inStockAdd();
+    
+
+
+var newInventory = new inventory(description, price);
+//include numInStock      
+            totalMerchandise.push(newInventory);
+           console.log("good");
+           console.log(totalMerchandise)
+
+
+}();
+
+
