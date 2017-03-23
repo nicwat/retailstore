@@ -138,8 +138,6 @@ sleep(6000);
 
 //***********************************
 
-var removeMerchandise = function() {
-};
 
 var modifyMerchandise = function() {
 
@@ -159,7 +157,21 @@ var searchMerchandise = function () {
     var returnToMain = sget("\nPress any key to return to main menu when ready").trim();
      mainMenu();
 };
-
+//*********************************
+var removeMerchandise = function() {
+  var itemDelete = sget("Please enter the description of the item you want to delete... ").trim();
+  var priceDelete = sget("Please enter the price of the item you want to delete...").trim();
+        totalMerchandise.forEach(function(item) {
+           if (itemDelete == item.description && priceDelete == item.price) {
+            var place = totalMerchandise.indexOf(item);
+              totalMerchandise.splice((place),1);
+            console.log("You have  removed 1 " + item.description + " for $" + item.price + " from your store ");
+                sleep(2000);}  
+            }
+          );   
+    var returnToMain = sget("\nPress any key to return to main menu when ready").trim();
+     mainMenu();
+};
 
 
 
