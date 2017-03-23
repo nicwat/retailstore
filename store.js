@@ -21,6 +21,7 @@ var wipeScreen = function () {
 };
 
 var exit = function() {
+	wipeScreen();
   console.log(userMessages.exit);
   sleep(600);
 };
@@ -37,51 +38,6 @@ var totalMerchandise = [];
 
 //*********************************//
 
-
-var descriptionAdd = function(){
-	var itemDescription = sget("Enter description").trim();
-	description = itemDescription;
-	if (itemDescription.length === 0){
-		console.log("Please enter a valid description");
-	}
-};
-
-var priceAdd = function (){
-	var itemPrice = sget("Enter price").trim();
-	price= itemPrice;
-	if (price.length <1 || isFinite(price)===false) {
-		console.log("Please enter a valid price.");
-	}
-};
-
-// var inStockAdd = function(){};
-
-
-
-
-var addMerchandise = function() { 
-		descriptionAdd();
-		priceAdd();
-		// inStockAdd();
-    var newInventory = new inventory(description, price);
-		//include numInStock      
-         totalMerchandise.push(newInventory);
-};
-
-
-
-//***********************************
-
-var removeMerchandise = function() {
-};
-var searchMerchandise = function() {
-
-};
-var modifyMerchandise = function() {
-
-};
-
-//************************************
  var printMenu = function() {
     for (var key in mainMenuPrompts) {
       console.log(mainMenuPrompts[key]);
@@ -132,8 +88,84 @@ var mainMenu = function() {
       console.log(userMessages.badInput);
       mainMenu();
     }
+};
+//*********************************//
+
+
+
+
+
+
+
+var descriptionAdd = function(){
+	var itemDescription = sget("Enter description").trim();
+	description = itemDescription;
+	if (itemDescription.length === 0){
+		console.log("Please enter a valid description");
+	}
+};
+
+var priceAdd = function (){
+	var itemPrice = sget("Enter price").trim();
+	price= itemPrice;
+	if (price.length <1 || isFinite(price)===false) {
+		console.log("Please enter a valid price.");
+	}
+};
+
+// var inStockAdd = function(){};
+
+
+
+
+var addMerchandise = function() { 
+		descriptionAdd();
+		priceAdd();
+		// inStockAdd();
+    var newInventory = new inventory(description, price);
+		//include numInStock      
+         totalMerchandise.push(newInventory);
+         addItemConfirm();
+};
+
+var addItemConfirm = function() {
+wipeScreen();
+console.log("Thanks, your item has been added to the inventory.");
+sleep(6000);
+      mainMenu();
+};
+
+
+//***********************************
+
+var removeMerchandise = function() {
+};
+
+var modifyMerchandise = function() {
+
+};
+
+//************************************
+var searchMerchandise = function () {
+    var searchItems = sget("Please enter the item you are looking for...").trim();
+    var searchPrice = sget("Please enter the price you are looking for...").trim();
+            totalMerchandise.forEach(function(object) {
+             if (searchItems == object.description && searchPrice == object.price) {
+            console.log("We found a(n) " + object.description + " for " + object.price + "  ");
+                sleep(2000);}
+            }
+          );     
+    console.log("\nThis concludes your search.")
+    var returnToMain = sget("\nPress any key to return to main menu when ready").trim();
+     mainMenu();
+};
+
+
+
+
+
+run = function() {
+    mainMenu();
+   
 }();
-
-
-
 
