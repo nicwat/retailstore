@@ -7,6 +7,8 @@
 
 var sget = require("sget");
 
+var modifyEntry;
+
 var sleep = function(milliseconds) {
     var start = new Date().getTime();
     for (var i = 0; i < 1e7; i++) {
@@ -99,7 +101,7 @@ var mainMenu = function() {
 
 var descriptionAdd = function(){
 	var itemDescription = sget("Enter description").trim();
-	description = itemDescription;
+	description = itemDescription.toLowerCase();
 	if (itemDescription.length === 0){
 		console.log("Please enter a valid description");
 	}
@@ -139,11 +141,49 @@ sleep(6000);
 //***********************************
 
 
-var modifyMerchandise = function() {
 
-};
+var modifyMerchandise = function(){
+ var modifyThisEntry = sget("Enter description of the item to modify?: ").trim();
+ 	modifyEntry = modifyThisEntry.toLowerCase();
+ 	totalMerchandise.forEach(function(object) {
+ 	if (modifyEntry == object.description)
+ 		console.log("We found a(n) " +object.description + " for " +object.price+ "");
+ 		var place = totalMerchandise.indexOf(object);
+ 		changeThis = place;
+ 		}
+ 	);
+ var whichChange =  sget("Would you like to change the (1) description or (2) number available? Enter 1 or 2").trim();
+ 		if (whichChange==1){
+ 			changeDescription();
+ 		}else if (whichChange ==2){
+ 			changeAvailable();
+ 		}
+ };
 
-//************************************
+ var changeDescription = function() {
+	console.log("Changing description of: " + modifyEntry +"");
+	var newDesc = sget("Enter the new name: ").trim(); 
+	desc = newDesc.toLowerCase();
+
+		 if (!newDesc.match(/^[a-zA-Z ]+$/)) {
+			console.log("Please ensure you have input a description.");
+			changeDescription();
+		} else if(newDesc.length === 0) {
+			console.log("Please ensure you have input a description.");
+			changeName();
+		} else { 
+              totalMerchandise.splice((changeThis.description),1, desc);
+			
+			console.log("Description changed to:  " + desc + "!");
+			sleep(1000);
+			mainMenu();
+		}
+	};
+
+
+
+// 		
+// //************************************
 var searchMerchandise = function () {
     var searchItems = sget("Please enter the item you are looking for...").trim();
     var searchPrice = sget("Please enter the price you are looking for...").trim();
